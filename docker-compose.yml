@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: clock_time_api_postgres
+    image: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: docker-db-troquei-api
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
