@@ -23,6 +23,7 @@ public class AutheticationService implements AuthenticationService {
     private UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        System.out.println("entrou");
         return userRepository.findByEmail(email);
     }
 
@@ -40,6 +41,8 @@ public class AutheticationService implements AuthenticationService {
                     .withIssuer("api-troquei")
                     .withSubject(user.getUsername())
                     .withExpiresAt(generateDataExpires())
+                    .withClaim("userId",user.getId())
+                    .withClaim("userRole",user.getRole().name())
                     .sign(algorithm);
 
         }catch (JWTCreationException expection){
